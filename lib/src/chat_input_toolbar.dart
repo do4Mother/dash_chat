@@ -69,7 +69,7 @@ class ChatInputToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ChatMessage message = ChatMessage(
-      text: text,
+      text: controller.text,
       user: user,
       messageIdGenerator: messageIdGenerator,
       createdAt: DateTime.now(),
@@ -134,7 +134,7 @@ class ChatInputToolbar extends StatelessWidget {
               if (showTraillingBeforeSend) ...trailling,
               if (sendButtonBuilder != null)
                 sendButtonBuilder(() async {
-                  if (text.length != 0) {
+                  if (controller.text.length != 0) {
                     await onSend(message);
 
                     controller.text = "";
@@ -145,7 +145,7 @@ class ChatInputToolbar extends StatelessWidget {
               else
                 IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: alwaysShowSend || text.length != 0
+                  onPressed: alwaysShowSend || controller.text.length != 0
                       ? () => _sendMessage(context, message)
                       : null,
                 ),
@@ -159,7 +159,7 @@ class ChatInputToolbar extends StatelessWidget {
   }
 
   void _sendMessage(BuildContext context, ChatMessage message) async {
-    if (text.length != 0) {
+    if (controller.text.length != 0) {
       await onSend(message);
 
       controller.text = "";
