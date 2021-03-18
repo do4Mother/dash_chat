@@ -381,7 +381,7 @@ class DashChatState extends State<DashChat> {
       changeVisible(false);
     }
     setState(() {
-      this._text = text;
+      this._text = textController.text;
     });
   }
 
